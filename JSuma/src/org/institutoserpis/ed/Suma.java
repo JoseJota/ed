@@ -15,7 +15,7 @@ public class Suma {
 		String segundoNumero = scanner.nextLine();
 		BigDecimal segundo = new BigDecimal(segundoNumero);
 		BigDecimal suma= primero.add(segundo);
-		System.out.println("                La suma es: " + suma);
+		System.out.println("                La suma es: " + suma);  
 		
 	}
 

@@ -2,50 +2,28 @@ using System;
 using System.Diagnostics;
 using Gtk;
 using System.Collections.Generic;
+using CBingo;
 
 public partial class MainWindow: Gtk.Window
-{
+{	
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
-//
-			Build (); 
-//
-//			IList<int> list = new List<int> ();
-//
-//			list.Add (16);
-//			list.Add (15);
-//			list.Add (17);
-//			list.Add (5);
-//			list.Add (4);
-//
-//			foreach (int item in list)
-//				Console.WriteLine ("item=" + Item);
-//		}
-		IList<int> bolas = new List<int> ();
-		for (int numero = 1; numero < 90; numero++)
-			bolas.Add (numero);
+		Build ();
+		Bombo bombo = new Bombo ();
+		Panel panel = new Panel ();
 
-	Random random = new Random();
+		vBoxMain.Add (panel.Table); //c#
+
 		buttonGoForward.Clicked += delegate {
-			int randomIndex = random.Next (bolas.Count);
-			int bola = bolas[randomIndex];
-			Console.WriteLine ("Bola =" + bola);
-			bolas.Remove(bola);
-			if (bolas.Count == 0)
-				buttonGoForward.Sensitive = false;
-			Process.Start("espeak", bola.ToString());
+			int bola = bombo.SacarBola();
+
+			Process.Start("espeak", "-v es ", bola.ToString());
 		};
-//		for (int vez = 0; vez < int.MaxValue; vez++) {
-//		int numeroAleatorio = random.Next(1000);
-//		if (numeroAleatorio < 5 || numeroAleatorio >= 995)
-//			Console.WriteLine ("vez="+vez + "numeroAleatorio =" + numeroAleatorio);
-//
-//		}
-	}
-		protected void OnDeleteEvent (object sender, DeleteEventArgs a)
-		{
-			Application.Quit ();
-			a.RetVal = true;
-		}
 	}
 
+	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
+	{
+		Application.Quit ();
+		a.RetVal = true;
+	}
+}
