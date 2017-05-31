@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final TextView txtRec = (TextView)findViewById(R.id.txtRecTemp);
-        final TextView txtLibra = (TextView)findViewById(R.id.txtFarenheit);
-        final TextView txtKilo = (TextView)findViewById(R.id.txtKelvin);
+        final TextView txtFarenheit = (TextView)findViewById(R.id.txtFarenheit);
+        final TextView txtKelvin = (TextView)findViewById(R.id.txtKelvin);
 
         final SeekBar seekBar1 = (SeekBar)findViewById(R.id.seekBar);
 
@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtRec =(double) (progress/10.0);
 
                 String texto = formatNumber (progress/10.0);
                 texto +=" ºC";
@@ -51,12 +50,13 @@ btnConverter.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
 
-        double Farenheit = (((txtRec)*9/5+32));
+        int foo = Integer.parseInt(String.valueOf(txtRec));
+        double Farenheit = (((foo)*9/5+32));
         String texto = formatNumber(Farenheit);
         texto += "ºF";
         R.id.txtFarenheit.setText(texto);
 
-        double Kelvin =(txtRec + 273);
+        double Kelvin =(foo + 273);
         String texto2 = formatNumber(Kelvin);
         texto2 += "K";
         R.id.txtKelvin.setText(texto2);
